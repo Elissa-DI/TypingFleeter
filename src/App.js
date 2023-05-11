@@ -36,7 +36,26 @@ function App() {
       setIncorrect(0)
     }
 
-    
+    if(status !== 'started'){
+      setStatus('started')
+      let interval = setInterval(()=> {
+        setCountDown((prevCountdown) => {
+          if(prevCountdown === 0){
+            clearInterval(interval)
+            setStatus('finished')
+            setCurrInput("")
+            return SECONDS
+          } else {
+            return prevCountdown - 1
+          }
+        })
+      }, 1000);
+      console.log('Clicked');
+    }
+   }
+
+
+   }
   return (
     <div className="App m-3">
       <div className="container fs-4 text-primary d-flex justify-content-center">
