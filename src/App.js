@@ -101,7 +101,19 @@ function App() {
           </div>
         </div>
       )}
-      
+      {status === 'finished' && (
+        <div className="row mt-3">
+          <div className="col d-flex justify-content-center flex-column">
+            <p className="fs-4">
+            Words per minute: 
+            </p>
+            <p className="text-primary fs-3">
+              {correct}
+            </p>
+          </div>
+
+        </div>
+      )}
     </div> 
   );
 }
