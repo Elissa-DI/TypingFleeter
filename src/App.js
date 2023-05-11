@@ -81,8 +81,27 @@ function App() {
       <div className="container">
         <button className="btn btn-info w-100 mb-4" onClick={start}>Start</button>
       </div>
-     
+      {status === 'started' && (
+        <div className="container-fluid">
+          <div className="card">
+            <div className="card-content">
+              <div className="content">
+                {words.map((word, i) => (
+                  <span key={i}>
+                  <span>
+                    {word.split('').map((char, idx) => (
+                       <span key={idx}>{char}</span>
+                    ))}
+                  </span>
+                  <span> </span>
+                </span>
+              ))}
+              </div>
+            </div>
+          </div>
+        </div>
       )}
+      
     </div> 
   );
 }
