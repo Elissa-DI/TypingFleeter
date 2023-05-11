@@ -54,7 +54,13 @@ function App() {
     }
    }
 
-
+   function handleKeyDown({keyCode}) {
+      if (keyCode === 32) {
+        checkMatch()
+        setCurrInput("")
+        setCurrWordIndex(currWordIndex + 1)
+      }
+   }
    function checkMatch() {
      const wordToCompare = words[currWordIndex]
      const doesItMatch = wordToCompare === currInput.trim()
