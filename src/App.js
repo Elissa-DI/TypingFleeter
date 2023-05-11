@@ -111,7 +111,14 @@ function App() {
               {correct}
             </p>
           </div>
-
+          <div className="col d-flex justify-content-center flex-column">
+            <p className="fs-4">
+              Accuracy:
+            </p>
+            <p className="text-info fs-3">
+             {Math.round(correct / (correct + incorrect)) * 100} %
+            </p>
+          </div>
         </div>
       )}
     </div> 
