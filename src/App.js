@@ -55,6 +55,14 @@ function App() {
    }
 
 
+   function checkMatch() {
+     const wordToCompare = words[currWordIndex]
+     const doesItMatch = wordToCompare === currInput.trim()
+       if(doesItMatch) {
+        setCorrect(correct + 1)
+       } else {
+        setIncorrect(incorrect + 1)
+       }
    }
   return (
     <div className="App m-3">
