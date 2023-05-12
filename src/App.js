@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { useState, useEffect, useRef } from 'react';
@@ -14,6 +15,8 @@ function App() {
   const [ correct, setCorrect ] = useState(0)
   const [ incorrect, setIncorrect ] = useState(0)
   const [ status, setStatus ] = useState("waiting")
+  const [ currCharIndex, setCurrCharIndex ] = useState(-1)
+  const [ currChar, setCurrChar ] = useState("")
   const textInput = useRef(null)
 
    useEffect(()=> {
@@ -34,6 +37,8 @@ function App() {
       setCurrWordIndex(0)
       setCorrect(0)
       setIncorrect(0)
+      setCurrCharIndex(-1)
+      setCurrChar("")
     }
 
     if(status !== 'started'){
@@ -54,11 +59,15 @@ function App() {
     }
    }
 
-   function handleKeyDown({keyCode}) {
+   function handleKeyDown({keyCode, key}) {
       if (keyCode === 32) {
         checkMatch()
         setCurrInput("")
         setCurrWordIndex(currWordIndex + 1)
+        setCurrCharIndex(-1)
+      } else {
+        setCurrCharIndex(currCharIndex + 1)
+        setCurrChar(key)
       }
    }
    function checkMatch() {
@@ -69,6 +78,17 @@ function App() {
        } else {
         setIncorrect(incorrect + 1)
        }
+   }
+   function getCharClass(wordIdx, charIdx, char){
+      if(wordIdx === currWordIndex && charIdx === currCharIndex && status !== 'finished'){
+        if(char === currChar){
+          return 'bg-success'
+        } else {
+          return 'bg-danger'
+        }
+      } else {
+        return ''
+      }
    }
   return (
     <div className="App m-3">
@@ -90,7 +110,7 @@ function App() {
                   <span key={i}>
                   <span>
                     {word.split('').map((char, idx) => (
-                       <span key={idx}>{char}</span>
+                       <span className={getCharClass(i, idx, char)} key={idx}>{char}</span>
                     ))}
                   </span>
                   <span> </span>
@@ -118,7 +138,7 @@ function App() {
             <p className="text-info fs-3">
              {Math.round(correct / (correct + incorrect)) * 100} %
             </p>
-          </div>
+          </div> 
         </div>
       )}
     </div> 
