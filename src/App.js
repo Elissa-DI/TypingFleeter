@@ -60,11 +60,15 @@ function App() {
    }
 
    function handleKeyDown({keyCode, key}) {
+    //Space bar
       if (keyCode === 32) {
         checkMatch()
         setCurrInput("")
         setCurrWordIndex(currWordIndex + 1)
         setCurrCharIndex(-1)
+      } else if (keyCode === 8){
+        setCurrCharIndex(currCharIndex -1)
+        setCurrChar("")
       } else {
         setCurrCharIndex(currCharIndex + 1)
         setCurrChar(key)
@@ -86,7 +90,9 @@ function App() {
         } else {
           return 'bg-danger'
         }
-      } else {
+      } else if(wordIdx === currWordIndex && currCharIndex >= words[currWordIndex].length){
+
+      } else { 
         return ''
       }
    }
